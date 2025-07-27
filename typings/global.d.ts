@@ -6,12 +6,20 @@
  * @Description:
  * @FilePath: \vue-cesium-vite-starter\typings\global.d.ts
  */
+
+/// <reference path="../public/Cesium/Cesium.d.ts" />
+
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  const component: DefineComponent<Record<string, unknown>, Record<string, unknown>, any>
+  export default component
+}
+
 declare global {
   /**
    * app 版本号，取 package.json 中 version 的值
    */
   const __APP_VERSION__: string
 }
-
 
 export {}

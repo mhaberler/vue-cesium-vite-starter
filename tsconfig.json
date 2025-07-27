@@ -15,11 +15,12 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "baseUrl": "./",
     "types": [
-      "vue-cesium/global.d.ts",
-      "vue-cesium/Cesium.d.ts",
-      "vite/client"
+      "vite/client",
+      "@vue/compiler-sfc"
     ],
     "paths": {
       "@src/*": ["src/*"],
@@ -28,8 +29,6 @@
   },
   "include": [
     "src/**/*",
-    "typings/*",
-    "node_modules/vue-cesium/Cesium.d.ts",
-    "node_modules/vue-cesium/global.d.ts"
+    "typings/*"
   ]
 }
