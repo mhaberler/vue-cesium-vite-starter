@@ -9,31 +9,26 @@
 <template>
   <div class="home viewer">
     <vc-viewer ref="viewerRef" @ready="onViewerReady">
-      <vc-entity
-        ref="entity"
-        :billboard="billboard"
-        :position="[108, 32]"
-        :point="point"
-        :label="label"
-        @click="onEntityEvt"
-        @mouseover="onEntityEvt"
-        @mouseout="onEntityEvt"
-      >
-        <vc-graphics-rectangle
-          :coordinates="[130, 20, 80, 25]"
-          material="green"
-        />
-      </vc-entity>
+      <!-- <vc-entity ref="entity" :billboard="billboard" :position="[108, 32]" :point="point" :label="label"
+        @click="onEntityEvt" @mouseover="onEntityEvt" @mouseout="onEntityEvt">
+        <vc-graphics-rectangle :coordinates="[130, 20, 80, 25]" material="green" />
+      </vc-entity> -->
       <vc-layer-imagery>
-        <vc-imagery-provider-osm />
-      </vc-layer-imagery>
-      <vc-navigation />
-      <vc-measurements :offset="[0, 40]" :on-fab-updated="onFabUpdated" />
-      <vc-drawings
-        position="bottom-right"
-        :main-fab-opts="mainFabOpts"
-        :offset="[0, 40]"
-      />
+        <!-- <vc-imagery-provider-osm /> -->
+        <vc-imagery-provider-wmts
+          url="https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/{Style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpeg"
+          layer="bmaporthofoto30cm" :rectangle="[8.782379,46.35877,17.5,49.037872]"
+          wmtsStyle="normal"
+          tileMatrixSetID="google3857"
+          :tileMatrixLabels="['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28']"
+          style="normal">
+        </vc-imagery-provider-wmts>
+        <VcTerrainProviderCesium>
+
+        </VcTerrainProviderCesium> </vc-layer-imagery>
+          <vc-navigation />
+          <vc-measurements :offset="[0, 40]" :on-fab-updated="onFabUpdated" />
+          <vc-drawings position="bottom-right" :main-fab-opts="mainFabOpts" :offset="[0, 40]" />
     </vc-viewer>
   </div>
 </template>
@@ -47,6 +42,9 @@ import {
   VcGraphicsPointProps,
   VcViewerRef,
 } from 'vue-cesium'
+import { Rectangle } from "cesium";
+
+
 import { VcPickEvent, VcReadyObject } from 'vue-cesium/es/utils/types'
 defineProps({
   msg: {
@@ -113,6 +111,7 @@ code {
   border-radius: 4px;
   color: #304455;
 }
+
 .viewer {
   height: 100vh;
 }

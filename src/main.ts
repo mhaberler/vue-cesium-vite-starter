@@ -10,17 +10,21 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import VueCesium from 'vue-cesium'
 import 'vue-cesium/dist/index.css'
+import enUS from "vue-cesium/es/locale/lang/en-us";
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window
 }
 const app = createApp(App)
+
 app.use(VueCesium, {
+   locale: enUS,
   // cesiumPath 是指引用的Cesium.js路径，如
-  cesiumPath: './Cesium/Cesium.js'
+  cesiumPath: "./Cesium/Cesium.js",
   // cesiumPath: 'https://unpkg.com/cesium/Build/Cesium/Cesium.js'
   // cesiumPath: 'https://www.supermapol.com/earth/Build/Cesium/Cesium.js',
   // 使用Cesium ion的数据源需要到https://cesium.com/ion/申请一个账户，获取Access Token。不指定的话可能导致 CesiumIon 的在线影像、地形加载失败
-  // accessToken: 'Your Cesium Ion defaultAccessToken'
-})
+  accessToken:  import.meta.env.VITE_CESIUM_ION_TOKEN || ''
+
+});
 app.mount('#app')
